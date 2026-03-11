@@ -4,22 +4,24 @@ import java.time.LocalDate;
 
 public class CodificadorSimples implements Codificador {
     public String getNome() {
-        return "Codificador Simples";
+        return "Codificador Enrico";
     }
 
     public LocalDate getDataCriacao() {
-        return LocalDate.of(2025, 03, 13);
+        return LocalDate.of(2025, 03, 09);
     }
 
     public int getNivelSeguranca(){
-        return 1;
+        return 5;
     }
 
     public String codifica(String str) {
         StringBuilder encoded = new StringBuilder();
-
+        char i = "a";
+        char f = "z";
+        
         for (char c : str.toCharArray()) {
-            encoded.append((char) (c + 1));
+            encoded.append((char) (f - (c - i)));
         }
 
         return encoded.toString();
@@ -29,7 +31,7 @@ public class CodificadorSimples implements Codificador {
         StringBuilder encoded = new StringBuilder();
         
         for (char c : str.toCharArray()) {
-            encoded.append((char) (c - 1));
+            encoded.append((char) (f - (c - i)));
         }
         
         return encoded.toString();
