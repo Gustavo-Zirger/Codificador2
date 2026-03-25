@@ -5,8 +5,9 @@ public class App {
         LogSimples.getInstance().log("Mensagem de alarme 23");
         LogSimples.getInstance().log("Mensagem de PANICO!!");
 
-        for(String m:LogSimples.getInstance()){
+        for(String m:LogSimples.getInstance().getLog()){
             System.out.println(m);
         }
+
     }
 }
