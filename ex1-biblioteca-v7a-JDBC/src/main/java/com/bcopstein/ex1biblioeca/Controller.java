@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-    private final Acervo livros;
+    private final AcervoJdbc livros;
     public final EstatisticasAutor estatisticas;
 
     @Autowired
-    public Controller(Acervo livros,EstatisticasAutor estatisticas) {
+    public Controller(AcervoJdbc livros,EstatisticasAutor estatisticas) {
         this.livros = livros; 
         this.estatisticas = estatisticas;
     }
