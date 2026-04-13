@@ -9,23 +9,17 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 public class Acervo {
-    private final LivrosRepositoryJdbc livroRepository;
+    private final LivrosRepository livroRepository;
+    private final AutorRepository  autorRepository;
 
     @Autowired
-    public Acervo(LivrosRepositoryJdbc livroRepository) {
+    public Acervo(LivrosRepository livroRepository, AutorRepository autorRepository) {
         this.livroRepository = livroRepository;
+        this.autorRepository = autorRepository;
     }
 
     @PostConstruct
     public void init() {
-        // Inicializa com dados padrão se o banco estiver vazio
-        if (livroRepository.count() == 0) {
-            livroRepository.save(new Livro(10, "Introdução ao Java", "Huguinho Pato", 2022));
-            livroRepository.save(new Livro(20, "Introdução ao Spring-Boot", "Zezinho Pato", 2020));
-            livroRepository.save(new Livro(15, "Principios SOLID", "Luizinho Pato", 2023));
-            livroRepository.save(new Livro(17, "Padroes de Projeto", "Lala Pato", 2019));
-            livroRepository.save(new Livro(25, "Usando JPA", "Lala Pato", 2026));
-        }
     }
 
     public List<Livro> getAll() {
@@ -39,14 +33,14 @@ public class Acervo {
                 .toList();
     }
 
-    public List<String> getAutores() {
+    public List<Autor> getAutores() {
         return getAll()
                 .stream()
                 .map(livro -> livro.getAutor())
                 .toList();
     }
 
-    public List<Livro> getLivrosDoAutor(String autor) {
+    public List<Livro> getLivrosDoAutor(Autor autor) {
         return livroRepository.findByAutor(autor);
     }
 
@@ -65,5 +59,12 @@ public class Acervo {
             return true;
         }
         return false;
+    }
+
+    public List<Autor> getAllAutores() {
+        return autorRepository.findAll();
+    }
+    public Autor getAutorByNome(String nome) {
+        return autorRepository.findByNome(nome).orElse(null);
     }
 }

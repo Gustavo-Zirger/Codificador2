@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
-    private final AcervoJdbc livros;
+    private final Acervo livros;
     public final EstatisticasAutor estatisticas;
 
     @Autowired
-    public Controller(AcervoJdbc livros,EstatisticasAutor estatisticas) {
+    public Controller(Acervo livros,EstatisticasAutor estatisticas) {
         this.livros = livros; 
         this.estatisticas = estatisticas;
     }
@@ -36,15 +36,16 @@ public class Controller {
 
     @GetMapping("autores")
     @CrossOrigin(origins = "*")
-    public List<String> getListaAutores() {
+    public List<Autor> getListaAutores() {
         return livros.getAutores();
     }
 
     @GetMapping("livrosautor")
     @CrossOrigin(origins = "*")
-    public List<Livro> getLivrosDoAutor(@RequestParam(value = "autor") String autor) {
-        estatisticas.informaConsultaAutor(autor.trim());
-        return livros.getLivrosDoAutor(autor.trim());
+    public List<Livro> getLivrosDoAutor(@RequestParam(value = "nome") String autorNome) {
+        Autor autor = livros.getAutorByNome(autorNome);
+        estatisticas.informaConsultaAutor(autorNome);
+        return livros.getLivrosDoAutor(autor);
     }
 
     @GetMapping("autorMaisConsultado")
@@ -61,9 +62,9 @@ public class Controller {
 
     @GetMapping("/livrosautor/{autor}/ano/{ano}")
     @CrossOrigin(origins = "*")
-    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autor, @PathVariable(value="ano")int ano) {
-        estatisticas.informaConsultaAutor(autor.trim());
-        return livros.getLivrosDoAutor(autor.trim())
+    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") Autor autor, @PathVariable(value="ano")int ano) {
+        estatisticas.informaConsultaAutor(String.valueOf(autor));
+        return livros.getLivrosDoAutor(autor)
                 .stream()
                 .filter(l->l.getAno() == ano)
                 .toList();

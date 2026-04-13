@@ -1,20 +1,31 @@
 package com.bcopstein.ex1biblioeca;
 
+import org.hibernate.annotations.ManyToAny;
+
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Livro {
     @Id
     private long id;
     private String titulo;
-    private String autor;
     private int ano;
+
+    @ManyToOne
+    @JoinColumn(name = "autor_id")
+    @JsonIgnoreProperties("livros") // Evita recursão infinita na serialização JSON
+    private Autor autor;
 
     public Livro() {
     }
 
-    public Livro(long id, String titulo, String autor, int ano) {
+    public Livro(long id, String titulo, Autor autor, int ano) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
@@ -29,7 +40,7 @@ public class Livro {
         return titulo;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
