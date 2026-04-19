@@ -14,12 +14,7 @@ public class EstatisticasAutor {
     }
 
     public void informaConsultaAutor(String autor){
-        if (contAutor.keySet().contains(autor)){
-            int contador = contAutor.get(autor);
-            contAutor.put(autor,contador+1);
-        }else{
-            contAutor.put(autor,1);
-        }
+        contAutor.put(autor, contAutor.getOrDefault(autor, 0) + 1);
     }
 
     public String autorMaisConsultado(){

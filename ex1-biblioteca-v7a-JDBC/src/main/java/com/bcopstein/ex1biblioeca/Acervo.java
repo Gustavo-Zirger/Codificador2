@@ -34,10 +34,7 @@ public class Acervo {
     }
 
     public List<Autor> getAutores() {
-        return getAll()
-                .stream()
-                .map(livro -> livro.getAutor())
-                .toList();
+        return autorRepository.findAll();
     }
 
     public List<Livro> getLivrosDoAutor(Autor autor) {
@@ -59,6 +56,10 @@ public class Acervo {
             return true;
         }
         return false;
+    }
+
+    public List<Livro> getLivrosDoAutorEAno(String nomeAutor, int ano) {
+        return livroRepository.findByAutorNomeAndAno(nomeAutor, ano);
     }
 
     public List<Autor> getAllAutores() {

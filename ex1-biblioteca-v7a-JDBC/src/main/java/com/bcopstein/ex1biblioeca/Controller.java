@@ -37,7 +37,7 @@ public class Controller {
     @GetMapping("autores")
     @CrossOrigin(origins = "*")
     public List<Autor> getListaAutores() {
-        return livros.getAutores();
+        return livros.getAllAutores();
     }
 
     @GetMapping("livrosautor")
@@ -62,12 +62,9 @@ public class Controller {
 
     @GetMapping("/livrosautor/{autor}/ano/{ano}")
     @CrossOrigin(origins = "*")
-    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") Autor autor, @PathVariable(value="ano")int ano) {
-        estatisticas.informaConsultaAutor(String.valueOf(autor));
-        return livros.getLivrosDoAutor(autor)
-                .stream()
-                .filter(l->l.getAno() == ano)
-                .toList();
+    public List<Livro> getLivrosDoAutor(@PathVariable(value="autor") String autorNome, @PathVariable(value="ano")int ano) {
+        estatisticas.informaConsultaAutor(autorNome);
+        return livros.getLivrosDoAutorEAno(autorNome, ano);
     }
 
     @PostMapping("/novolivro")
