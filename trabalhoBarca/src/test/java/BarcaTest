@@ -1,0 +1,60 @@
+package gustavo.enrico;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+/*casos de teste:
+
+passageiros: 
+
+[0,100] - sentam na frente 1 a 20 
+[101,200] - sentam atrás 40 a 60
+[201,1200] - sentam em qualquer lugar
+
+fileira: 
+
+[1,60]
+
+assentos:
+
+[1,20]
+
+
+* Retorna: 
+     * 0 – Identificador de assento inválido 
+     * 1 – Assento ocupado 
+     * 2 – Assento bloqueado devido a distribuição de peso 
+     * 3 – Ok, assento atribuído ao passageiro. 
+     * 
+
+
+passageiro | fileira | assento | resultado
+           |         |         |    
+    01     |   01    |   01    | aprovado(3)
+    01     |   21    |   19    | inválido(2)
+    01     |   01    |   21    | inválido(0)   
+   101     |   41    |   01    | aprovado(3)   
+   101     |   01    |   19    | inválido(2)   
+   101     |   41    |   21    | inválido(0)  
+   201     |   31    |   01    | aprovado(3)   
+   201     |   01    |   19    | aprovado(3)     
+   201     |   41    |   19    | aprovado(3)   
+   201     |   41    |   21    | inválido(0)
+  1201     |   41    |   21    | inválido(1)
+ */
+
+@SpringBootTest
+class BarcaTest {
+
+	@Test  
+    @DisplayName("Verifica se o assento está ocupado")
+	void VerificaLugar() {
+        Barca barca = new Barca();
+        barca.ocupaLugarSemVerificacao(01, 01); // Assento F01A01 ocupado
+        int resultado = barca.ocupaLugar("F01A01"); // Tenta ocupar o mesmo assento
+        assertEquals(2, resultado); // Verifica se o resultado é 1 (assento ocupado)
+	}
+
+	
+
+}
