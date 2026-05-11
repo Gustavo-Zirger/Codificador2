@@ -43,7 +43,7 @@ public class Barca {
         // int assento = Character.getNumericValue(partes[4]) * 10 + Character.getNumericValue(partes[5]);
 
         int fileira = Integer.parseInt(assentoInformado.substring(1, 3));
-        int assento = Integer.parseInt(assentoInformado.substring(1, 3));
+        int assento = Integer.parseInt(assentoInformado.substring(4));
 
 
         if(assentoInformado.substring(0,1).equals("F") && assentoInformado.substring(3,4).equals("A") && fileira > 0 && fileira <= 60 && assento > 0 && assento <= 20){

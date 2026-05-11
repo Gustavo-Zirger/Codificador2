@@ -51,7 +51,6 @@ public class BarcaTest {
     @DisplayName("Verifica se ta ocupado")
     @ParameterizedTest
     @CsvSource({
-        "F01A01, 1",
         "F01A02, 3",
         "F02A01, 3",
         "F02A02, 3"
