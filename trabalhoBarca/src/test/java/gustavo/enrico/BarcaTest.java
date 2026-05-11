@@ -1,7 +1,8 @@
 package gustavo.enrico;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 /*casos de teste:
 
@@ -43,18 +44,12 @@ passageiro | fileira | assento | resultado
   1201     |   41    |   21    | inválido(1)
  */
 
-@SpringBootTest
-class BarcaTest {
-
-	@Test  
-    @DisplayName("Verifica se o assento está ocupado")
-	void VerificaLugar() {
+public class BarcaTest {
+    @Test
+    void testOcupaLugar() {
         Barca barca = new Barca();
         barca.ocupaLugarSemVerificacao(01, 01); // Assento F01A01 ocupado
         int resultado = barca.ocupaLugar("F01A01"); // Tenta ocupar o mesmo assento
-        assertEquals(2, resultado); // Verifica se o resultado é 1 (assento ocupado)
-	}
-
-	
-
+        assertEquals(1, resultado); // Verifica se o resultado é 1 (assento ocupado)
+    }
 }
