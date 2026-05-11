@@ -1,9 +1,10 @@
 package gustavo.enrico;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 /*casos de teste:
 
@@ -48,10 +49,16 @@ passageiro | fileira | assento | resultado
 public class BarcaTest {
     @Test
     @DisplayName("Verifica se ta ocupado")
-    void testOcupaLugar() {
+    @ParameterizedTest
+    @CsvSource({
+        "F01A01, 1",
+        "F01A02, 3",
+        "F02A01, 3",
+        "F02A02, 3"
+    })
+    void testOcupaLugar(String assento, int expectedResult) {
         Barca barca = new Barca();
         barca.ocupaLugarSemVerificacao(01, 01); // Assento F01A01 ocupado
-        int resultado = barca.ocupaLugar("F01A01"); // Tenta ocupar o mesmo assento
-        assertEquals(1, resultado); // Verifica se o resultado é 1 (assento ocupado)
+        assertEquals(expectedResult, barca.ocupaLugar(assento)); // Verifica se o resultado é 1 (assento ocupado)
     }
 }

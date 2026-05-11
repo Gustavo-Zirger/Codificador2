@@ -6,7 +6,7 @@ public class Barca {
     int cont;
 
     public Barca(){ 
-        this.lugares = new int[61][21];
+        this.lugares = new int[60][20];
         cont = 0;
     } 
 
@@ -16,7 +16,7 @@ public class Barca {
     // Ocupa o lugar sem verificação, isto é, simplesmente ocupa o lugar 
     // sem validar nenhuma das regras de ocupação 
     public void ocupaLugarSemVerificacao(int fila, int assento){ 
-        lugares[fila][assento] = 1;
+        lugares[fila-1][assento-1] = 1;
         cont++;
     } 
 
@@ -37,11 +37,16 @@ public class Barca {
      */ 
 
     public int ocupaLugar(String assentoInformado){ 
-        char[] partes = assentoInformado.toCharArray();
-        int fileira = Character.getNumericValue(partes[1]) * 10 + Character.getNumericValue(partes[2]);
-        int assento = Character.getNumericValue(partes[4]) * 10 + Character.getNumericValue(partes[5]);
-        
-        if(partes[0] == 'F' && partes[3] == 'A' && fileira > 0 && fileira <= 60 && assento > 0 && assento <= 20){
+        //F01A01 F[0] 0[1] 1[2] A[3] 0[4] 1[5]
+        // char[] partes = assentoInformado.toCharArray();
+        // int fileira = Character.getNumericValue(partes[1]) * 10 + Character.getNumericValue(partes[2]);
+        // int assento = Character.getNumericValue(partes[4]) * 10 + Character.getNumericValue(partes[5]);
+
+        int fileira = Integer.parseInt(assentoInformado.substring(1, 3));
+        int assento = Integer.parseInt(assentoInformado.substring(1, 3));
+
+
+        if(assentoInformado.substring(0,1).equals("F") && assentoInformado.substring(3,4).equals("A") && fileira > 0 && fileira <= 60 && assento > 0 && assento <= 20){
 
             if(cont <= 100){
                 if(fileira <= 20){
