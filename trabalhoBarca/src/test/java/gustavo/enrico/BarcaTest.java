@@ -2,6 +2,7 @@ package gustavo.enrico;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -113,5 +114,18 @@ public class BarcaTest {
             }
         }
         assertEquals(esperado, barca.ocupaLugar(lugar));
+    }
+
+    @Test
+    @DisplayName("Caso lotado")
+    void lotado(){
+        Barca barca = new Barca();
+        for(int f = 1; f<61;f++){
+            for(int a = 1; a<21; a++){
+                barca.ocupaLugarSemVerificacao(f, a);
+            }
+        }
+        int resultado = barca.ocupaLugar("F60A20");
+        assertEquals(1,resultado);
     }
 }
