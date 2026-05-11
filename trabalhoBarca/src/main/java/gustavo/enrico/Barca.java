@@ -73,10 +73,15 @@ public class Barca {
                 } 
             }
             else{
-                if(lugares[fileira-1][assento-1] == 0){
-                    lugares[fileira-1][assento-1] = 1;
-                    cont++;
-                    return 3; // assento atribuído ao passageiro
+                if(cont < 1200){
+                    if(lugares[fileira-1][assento-1] == 0){
+                        lugares[fileira-1][assento-1] = 1;
+                        cont++;
+                        return 3; // assento atribuído ao passageiro
+                    }
+                    else{
+                        return 1; // assento ocupado
+                    }                
                 }
                 else{
                     return 1; // assento ocupado
