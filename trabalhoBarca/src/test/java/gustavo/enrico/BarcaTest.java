@@ -2,7 +2,6 @@ package gustavo.enrico;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -51,10 +50,9 @@ assentos:
  */
 
 public class BarcaTest {
-    @Test
     @DisplayName("casos primeira distribuição de peso")
     @ParameterizedTest
-    @CsvSource({ // "lugar, valor experado"
+    @CsvSource({ 
         "F01A01, 1",
         "F00A01, 0",
         "F01A21, 0",
@@ -71,10 +69,9 @@ public class BarcaTest {
         assertEquals(esperado, barca.ocupaLugar(lugar));
     }
 
-    @Test
     @DisplayName("casos segunda distribuição de peso")
     @ParameterizedTest
-    @CsvSource({ // "lugar, valor experado"
+    @CsvSource({ 
         "F40A01, 1",
         "F61A01, 0",
         "F40A21, 0",
@@ -96,10 +93,9 @@ public class BarcaTest {
         assertEquals(esperado, barca.ocupaLugar(lugar));
     }
 
-    @Test
     @DisplayName("casos terceira distribuição de peso")
     @ParameterizedTest
-    @CsvSource({ // "lugar, valor experado"
+    @CsvSource({ 
         "F33A01, 3",
         "F09A01, 3",
         "F46A01, 3"
