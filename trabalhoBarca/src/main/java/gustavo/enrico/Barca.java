@@ -15,10 +15,11 @@ public class Barca {
     // Método auxiliar projetado para facilitar testes (montagem de cenário) 
     // Ocupa o lugar sem verificação, isto é, simplesmente ocupa o lugar 
     // sem validar nenhuma das regras de ocupação 
-    public void ocupaLugarSemVerificacao(int fila, int assento){ 
+    public void ocupaLugarSemVerificacao(int fila, int assento){
         lugares[fila-1][assento-1] = 1;
-        cont++;
-    } 
+        cont++; 
+    }
+    
 
  
 

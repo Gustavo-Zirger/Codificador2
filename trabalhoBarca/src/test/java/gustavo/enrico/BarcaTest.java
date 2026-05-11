@@ -31,33 +31,38 @@ assentos:
      * 
 
 
-passageiro | fileira | assento | resultado
+    peso   | fileira | assento | resultado
            |         |         |    
-    01     |   01    |   01    | aprovado(3)
-    01     |   21    |   19    | inválido(2)
-    01     |   01    |   21    | inválido(0)   
-   101     |   41    |   01    | aprovado(3)   
-   101     |   01    |   19    | inválido(2)   
-   101     |   41    |   21    | inválido(0)  
-   201     |   31    |   01    | aprovado(3)   
-   201     |   01    |   19    | aprovado(3)     
-   201     |   41    |   19    | aprovado(3)   
-   201     |   41    |   21    | inválido(0)
-  1201     |   41    |   21    | inválido(1)
+     1     |   01    |   01    | aprovado(3)
+     1     |   21    |   19    | inválido(2)
+     1     |   01    |   21    | inválido(0)
+     1     |   21    |   19    | inválido(2)
+     1     |   01    |   21    | inválido(0)     
+     2     |   41    |   01    | aprovado(3)   
+     2     |   01    |   19    | inválido(2)   
+     2     |   41    |   21    | inválido(0)  
+     3     |   31    |   01    | aprovado(3)   
+     3     |   01    |   19    | aprovado(3)     
+     3     |   41    |   19    | aprovado(3)   
+     3     |   41    |   21    | inválido(0)
+     3     |   41    |   21    | inválido(1)
  */
 
 public class BarcaTest {
     @Test
-    @DisplayName("Verifica se ta ocupado")
+    @DisplayName("casos primeira distribuição de peso")
     @ParameterizedTest
-    @CsvSource({
-        "F01A02, 3",
-        "F02A01, 3",
-        "F02A02, 3"
+    @CsvSource({ // "lugar, valor experado"
+        "F01A01, 1",
+        "F00A01, 0"
     })
-    void testOcupaLugar(String assento, int expectedResult) {
+    void testOcupaLugar(String lugar, int esperado) {
         Barca barca = new Barca();
-        barca.ocupaLugarSemVerificacao(01, 01); // Assento F01A01 ocupado
-        assertEquals(expectedResult, barca.ocupaLugar(assento)); // Verifica se o resultado é 1 (assento ocupado)
+        for(int f = 1; f <=3; f++){ // cont 60 fileira 1-3 cheia
+            for(int a = 1; a<=20; a++){
+                barca.ocupaLugarSemVerificacao(f,a);
+            }
+        }
+        assertEquals(esperado, barca.ocupaLugar(lugar));
     }
 }
