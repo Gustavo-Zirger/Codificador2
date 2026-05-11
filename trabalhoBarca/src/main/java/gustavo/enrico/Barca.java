@@ -6,7 +6,7 @@ public class Barca {
     int cont;
 
     public Barca(){ 
-        lugares = new int[60][20];
+        this.lugares = new int[61][21];
         cont = 0;
     } 
 
