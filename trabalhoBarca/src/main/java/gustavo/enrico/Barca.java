@@ -17,6 +17,7 @@ public class Barca {
     // sem validar nenhuma das regras de ocupação 
     public void ocupaLugarSemVerificacao(int fila, int assento){ 
         lugares[fila][assento] = 1;
+        cont++;
     } 
 
  
