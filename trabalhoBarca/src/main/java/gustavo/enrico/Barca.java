@@ -42,15 +42,46 @@ public class Barca {
         
         if(partes[0] == 'F' && partes[3] == 'A' && fileira > 0 && fileira <= 60 && assento > 0 && assento <= 20){
 
-            if(cont < 100){
-                if(fileira <= 20 && assento <= 20){
-                    {
-
+            if(cont <= 100){
+                if(fileira <= 20){
+                    if(lugares[fileira-1][assento-1] == 0){
+                        lugares[fileira-1][assento-1] = 1;
+                        cont++;
+                        return 3; // assento atribuído ao passageiro
+                    }
+                    else{
+                        return 1; // assento ocupado
+                    }
+                }
+                else{
+                    return 2; // bloqueado distribuição de peso
+                } 
+            }
+            else if(cont > 100 && cont <= 200){
+                if(fileira >= 40 && fileira <= 60){
+                    if(lugares[fileira-1][assento-1] == 0){
+                        lugares[fileira-1][assento-1] = 1;
+                        cont++;
+                        return 3; // assento atribuído ao passageiro
+                    }
+                    else{
+                        return 1; // assento ocupado
+                    }
+                }
+                else{
+                    return 2; // bloqueado distribuição de peso
+                } 
+            }
+            else{
+                if(lugares[fileira-1][assento-1] == 0){
+                    lugares[fileira-1][assento-1] = 1;
+                    cont++;
+                    return 3; // assento atribuído ao passageiro
+                }
+                else{
+                    return 1; // assento ocupado
                 }
             }
-            
-            }
-
         }
         return 0; // assento inválido
     }
