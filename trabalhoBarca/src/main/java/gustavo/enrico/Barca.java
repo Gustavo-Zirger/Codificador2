@@ -91,10 +91,4 @@ public class Barca {
         }
         return 0; // assento inválido
     }
-
-    public static void main(String[] args){
-        Barca barca = new Barca();
-        System.out.println("teste");
-        System.out.println(barca.ocupaLugar("F0129"));
-    }
 } 
