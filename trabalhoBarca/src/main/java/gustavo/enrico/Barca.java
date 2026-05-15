@@ -19,7 +19,7 @@ public class Barca {
      * @param fila
      * @return
      */
-    public boolean isOcupado(int assento, int fila) {
+    public boolean isOcupado(int fila, int assento) {
         //troca para o indice 0 do java para nao dar erro de logica
         int f = fila - 1;
         int a = assento - 1;
@@ -78,7 +78,7 @@ public class Barca {
         try {
             int f = Integer.parseInt(assentoInformado.substring(1, 3));
             int a = Integer.parseInt(assentoInformado.substring(4, 6));
-
+            
             if (f < 1 || f > 60 || a < 1 || a >20) {
                 return 0;
             }
