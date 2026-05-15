@@ -86,7 +86,7 @@ public class BarcaTest {
                 barca.ocupaLugarSemVerificacao(f,a);
             }
         }
-        for(int f = 40; f <= 43; f++){ // cont 160 fileira 40-43 cheia
+        for(int f = 40; f <= 43; f++){ // cont 180 fileira 40-43 cheia
             for(int a = 1; a<=20; a++){
                 barca.ocupaLugarSemVerificacao(f,a);
             }
@@ -108,7 +108,7 @@ public class BarcaTest {
                 barca.ocupaLugarSemVerificacao(f,a);
             }
         }
-        for(int f = 40; f <= 45; f++){ // cont 200 fileira 40-45 cheia
+        for(int f = 40; f <= 45; f++){ // cont 220 fileira 40-45 cheia
             for(int a = 1; a <= 20; a++){
                 barca.ocupaLugarSemVerificacao(f,a);
             }
