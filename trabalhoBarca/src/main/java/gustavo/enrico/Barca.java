@@ -39,9 +39,6 @@ public class Barca {
 
     public int ocupaLugar(String assentoInformado){ 
         //F01A01 F[0] 0[1] 1[2] A[3] 0[4] 1[5]
-        // char[] partes = assentoInformado.toCharArray();
-        // int fileira = Character.getNumericValue(partes[1]) * 10 + Character.getNumericValue(partes[2]);
-        // int assento = Character.getNumericValue(partes[4]) * 10 + Character.getNumericValue(partes[5]);
 
         int fileira = Integer.parseInt(assentoInformado.substring(1, 3));
         int assento = Integer.parseInt(assentoInformado.substring(4));
