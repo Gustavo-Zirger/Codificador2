@@ -1,5 +1,6 @@
 package com.bcopstein.ex3_sist_vendas_hexagonal.infra.adapters.out.persistencia;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,24 @@ public class RepositorioPedidosJPA implements RepositorioPedidos {
     public List<Pedido> todosPedidos() {
         return pedidoSpringDataRepository.findAll()
             .stream()
+            .map(entity->toDomain(entity))
+            .toList();
+    }
+
+    @Override
+    public List<Pedido> pedidosPorStatus(StatusPedido status) {
+        return pedidoSpringDataRepository.findAll()
+            .stream()
+            .filter(entity -> entity.getStatus() == status)
+            .map(entity->toDomain(entity))
+            .toList();
+    }
+
+    @Override
+    public List<Pedido> pedidosReservadosAntesDe(LocalDate data) {
+        return pedidoSpringDataRepository.findAll()
+            .stream()
+            .filter(entity -> entity.getStatus() == StatusPedido.RESERVADO && entity.getData().isBefore(data))
             .map(entity->toDomain(entity))
             .toList();
     }

@@ -14,11 +14,14 @@ import com.bcopstein.ex3_sist_vendas_hexagonal.domain.model.EstadoBrasil;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.model.Pedido;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.model.Produto;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.CancelarPedidoUC;
+import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.CancelarPedidosReservadosPorMaisDeUmaSemanaUC;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.ConfirmarPedidoUC;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.CriarPedidoCommand;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.CriarPedidoUC;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.ItemCommand;
+import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.ListarPedidosReservadosNaoEfetivadosUC;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.ListarProdutosDisponiveisUC;
+import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.ListarProdutosReservadosPorMaisDeUmaSemanaUC;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.ListarTodosPedidosUC;
 import com.bcopstein.ex3_sist_vendas_hexagonal.domain.portas.in.casos_de_uso.ReservarPedidoUC;
 
@@ -30,6 +33,9 @@ public class Controller {
     private final ConfirmarPedidoUC confirmarPedidoUC;
     private final CancelarPedidoUC cancelarPedidoUC;
     private final ListarTodosPedidosUC listarTodosPedidosUC;
+    private final ListarPedidosReservadosNaoEfetivadosUC listarPedidosReservadosNaoEfetivadosUC;
+    private final ListarProdutosReservadosPorMaisDeUmaSemanaUC listarProdutosReservadosPorMaisDeUmaSemanaUC;
+    private final CancelarPedidosReservadosPorMaisDeUmaSemanaUC cancelarPedidosReservadosPorMaisDeUmaSemanaUC;
 
 
     @Autowired
@@ -38,13 +44,19 @@ public class Controller {
                       ReservarPedidoUC reservarPedidoUC, 
                       ConfirmarPedidoUC confirmarPedidoUC,
                       CancelarPedidoUC cancelarPedidoUC,
-                      ListarTodosPedidosUC listarTodosPedidosUC) {
+                      ListarTodosPedidosUC listarTodosPedidosUC,
+                      ListarPedidosReservadosNaoEfetivadosUC listarPedidosReservadosNaoEfetivadosUC,
+                      ListarProdutosReservadosPorMaisDeUmaSemanaUC listarProdutosReservadosPorMaisDeUmaSemanaUC,
+                      CancelarPedidosReservadosPorMaisDeUmaSemanaUC cancelarPedidosReservadosPorMaisDeUmaSemanaUC) {
         this.criarPedidoUC = criarPedidoUC;
         this.listarProdutosDisponiveisUC = listarProdutosDisponiveisUC;
         this.reservarPedidoUC = reservarPedidoUC;
         this.confirmarPedidoUC = confirmarPedidoUC;
         this.cancelarPedidoUC = cancelarPedidoUC;
         this.listarTodosPedidosUC = listarTodosPedidosUC;
+        this.listarPedidosReservadosNaoEfetivadosUC = listarPedidosReservadosNaoEfetivadosUC;
+        this.listarProdutosReservadosPorMaisDeUmaSemanaUC = listarProdutosReservadosPorMaisDeUmaSemanaUC;
+        this.cancelarPedidosReservadosPorMaisDeUmaSemanaUC = cancelarPedidosReservadosPorMaisDeUmaSemanaUC;
     }
 
     @GetMapping("")
@@ -100,6 +112,33 @@ public class Controller {
     public PedidoResponseDTO cancelarPedido(@PathVariable(value="pedidoId")Long pedidoId) {
         Pedido pedido = cancelarPedidoUC.executar(pedidoId);
         return PedidoResponseDTO.fromDomain(pedido);
+    }
+
+    @GetMapping("pedidosReservadosNaoEfetivados")
+    @CrossOrigin(origins = "*")
+    public List<PedidoResponseDTO> pedidosReservadosNaoEfetivados() {
+        List<Pedido> pedidos = listarPedidosReservadosNaoEfetivadosUC.executar();
+        return pedidos.stream()
+            .map(PedidoResponseDTO::fromDomain)
+            .toList();
+    }
+
+    @GetMapping("produtosReservadosPorMaisDeUmaSemana")
+    @CrossOrigin(origins = "*")
+    public List<ProdutoResponseDTO> produtosReservadosPorMaisDeUmaSemana() {
+        List<Produto> produtos = listarProdutosReservadosPorMaisDeUmaSemanaUC.executar();
+        return produtos.stream()
+            .map(ProdutoResponseDTO::fromDomain)
+            .toList();
+    }
+
+    @GetMapping("cancelarPedidosReservadosPorMaisDeUmaSemana")
+    @CrossOrigin(origins = "*")
+    public List<PedidoResponseDTO> cancelarPedidosReservadosPorMaisDeUmaSemana() {
+        List<Pedido> pedidos = cancelarPedidosReservadosPorMaisDeUmaSemanaUC.executar();
+        return pedidos.stream()
+            .map(PedidoResponseDTO::fromDomain)
+            .toList();
     }
 
     @PostMapping("criarPedido/estado/{estado}")
